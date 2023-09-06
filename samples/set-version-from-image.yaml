@@ -1,0 +1,16 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  name: set-version-from-image
+spec:
+  rules:
+  - name: set-version-from-image-rule
+    match:
+      resources:
+        kinds:
+        - Pod
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          labels:
+            version: "{{ images.containers.*.tag | join(',', @) }}"

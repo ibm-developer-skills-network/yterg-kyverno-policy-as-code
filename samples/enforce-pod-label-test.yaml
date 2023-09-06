@@ -1,0 +1,18 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  name: enforce-pod-label-test
+spec:
+  validationFailureAction: Enforce # or Audit
+  rules:
+  - name: check-label-test
+    match:
+      resources:
+        kinds:
+        - Pod
+    validate:
+      message: "All pods must have a label 'test'"
+      pattern:
+        metadata:
+          labels:
+            test: "?*"
