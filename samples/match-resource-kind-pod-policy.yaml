@@ -1,0 +1,16 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  name: match-resource-kind-pod-policy
+spec:
+  rules:
+  - name: match-resource-kind-pod-rule
+    match:
+      all:
+        - resources:
+            kinds:
+            - Pod
+        - resources:
+            selector:
+              matchLabels:
+                app: myapp
