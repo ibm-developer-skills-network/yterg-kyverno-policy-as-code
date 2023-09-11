@@ -1,0 +1,17 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  name: allow-semantic-versioning
+spec:
+  rules:
+  - name: check-versioning
+    match:
+      resources:
+        kinds:
+        - Pod
+    validate:
+      message: "Only semantic versioning is allowed for container image tags."
+      pattern:
+        spec:
+          containers:
+          - image: "*:^[0-9]+\\.[0-9]+\\.[0-9]+$"
