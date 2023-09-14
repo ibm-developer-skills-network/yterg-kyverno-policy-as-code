@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: Policy
 metadata:
-  name: allow-semantic-versioning
+  name: enforce-semantic-versioning
 spec:
   validationFailureAction: Enforce
   rules:
