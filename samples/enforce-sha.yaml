@@ -1,18 +1,18 @@
 apiVersion: kyverno.io/v1
 kind: Policy
 metadata:
-  name: enforce-semantic-versioning
+  name: enforce-images-use-checksums
 spec:
   validationFailureAction: Enforce
   rules:
-  - name: check-versioning
+  - name: checksum
     match:
       resources:
         kinds:
         - Pod
     validate:
-      message: "Only semantic versioning is allowed for container image tags."
+      message: "Only checksums are allowed for container image tags."
       pattern:
         spec:
           containers:
-          - image: "*:^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          - image: "*@*"
